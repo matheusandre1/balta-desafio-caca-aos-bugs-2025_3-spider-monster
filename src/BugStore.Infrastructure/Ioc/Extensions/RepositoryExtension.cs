@@ -15,7 +15,7 @@ public static class InfraServiceCollectionExtensions
 
         services.AddDbContext<AppContextDb>(options =>
         {
-            options.UseSqlite(connectionString);           
+            options.UseSqlite(connectionString, b => b.MigrationsAssembly(typeof(AppContextDb).Assembly.FullName));           
         });
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
