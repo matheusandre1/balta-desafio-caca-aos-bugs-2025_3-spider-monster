@@ -13,7 +13,7 @@ public class OrderService(IRepository<Order> _orderRepository, IRepository<Produ
     {
         var entity = await  _orderRepository.GetByIdAsync(id);
 
-        if(entity is null) throw new Exception("Order not found");
+        if(entity is null) throw new Exception("Order Not Found");
 
         return await OrderMethods.BuildDtoAsync(entity, _productRepository, _mapper);
       
