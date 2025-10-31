@@ -68,8 +68,8 @@ customers.MapPut("/{id:guid}", async (ICustomerService service, Guid id, Custome
 
 customers.MapDelete("/{id:guid}", async (ICustomerService service, Guid id) =>
 {
-    var deletedCustomer = await service.DeleteCustomerAsync(id);
-    return deletedCustomer is not null ? Results.Ok(deletedCustomer) : Results.NotFound();
+     await service.DeleteCustomerAsync(id);
+    return Results.NoContent();
 });
 
 #endregion 
@@ -96,14 +96,14 @@ products.MapPost("/", async (IProductService service, ProductDtoRequest productD
 
 products.MapPut("/{id:guid}", async (IProductService service, Guid id, ProductDtoRequest productDtoRequest) =>
 {
-    var updatedProduct = await service.UpdateProductAsync(id, productDtoRequest);
-    return updatedProduct is not null ? Results.Ok(updatedProduct) : Results.NotFound();
+    await service.UpdateProductAsync(id, productDtoRequest);
+    return Results.NoContent();
 });
 
 products.MapDelete("/{id:guid}", async (IProductService service, Guid id) =>
 {
-    var deletedProduct = await service.DeleteProductAsync(id);
-    return deletedProduct is not null ? Results.Ok(deletedProduct) : Results.NotFound();
+    await service.DeleteProductAsync(id);
+    return Results.NoContent();
 });
 #endregion
 
@@ -112,7 +112,7 @@ products.MapDelete("/{id:guid}", async (IProductService service, Guid id) =>
 orders.MapGet("/{id:guid}", async (IOrderService service, Guid id) =>
 {
     var order = await service.GetByIdAsync(id);
-    return products is not null ? Results.Ok(products) : Results.NoContent();
+    return order is not null ? Results.Ok(order) : Results.NoContent();
 });
 
 orders.MapPost("/", async (IOrderService service, OrderRequest orderRequest) =>

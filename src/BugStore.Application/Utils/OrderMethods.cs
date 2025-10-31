@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BugStore.Application.Services.Customers.Dto.Response;
+using BugStore.Application.Services.Dtos.OrderLines.Request;
 using BugStore.Application.Services.Dtos.OrderLines.Response;
 using BugStore.Application.Services.Orders.Dto.Request;
 using BugStore.Application.Services.Orders.Dto.Response;
@@ -18,7 +19,7 @@ public class OrderMethods
         }
     }
 
-    public static void ValidateLines(List<OrderLineDto> lines)
+    public static void ValidateLines(List<OrderLineRequest> lines)
     {
         if (lines is null || lines.Count == 0)
         {
@@ -67,7 +68,6 @@ public class OrderMethods
                 Total = 0m
             });
         }
-
         return order;
     }
 

@@ -9,5 +9,5 @@ public class Order
     public Customer? Customer { get; set; }
     public DateTime CreatedAt { get; set; }    
     public DateTime UpdateAt { get; set; }
-    public List<OrderLine> Lines { get; set; } = null;
+    public List<OrderLine> Lines { get; set; } = new List<OrderLine>();
 }

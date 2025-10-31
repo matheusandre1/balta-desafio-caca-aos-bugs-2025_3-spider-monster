@@ -27,24 +27,27 @@ public class ProductService(IRepository<Product> _productRepository,
     public async Task<ProductDto> GetByIdAsync(Guid id)
     {
         var entity = await _productRepository.GetByIdAsync(id);
+
+        if (entity is null) throw new Exception("Product Not Found");
+            
         return _mapper.Map<ProductDto>(entity);
     }
 
-    public async Task<ProductDto> UpdateProductAsync(Guid id, ProductDtoRequest productDtoRequest)
+    public async Task UpdateProductAsync(Guid id, ProductDtoRequest productDtoRequest)
     {
         var entity = await _productRepository.GetByIdAsync(id);
 
         entity.UpdateWith(productDtoRequest.Title, productDtoRequest.Description, productDtoRequest.Price);
 
-        await _productRepository.UpdateAsync(entity);
-
-        return _mapper.Map<ProductDto>(entity);
+        await _productRepository.UpdateAsync(entity);       
     }
 
-    public async Task<ProductDto> DeleteProductAsync(Guid id)
+    public async Task DeleteProductAsync(Guid id)
     {
-        var entity = _productRepository.GetByIdAsync(id);
-        await _productRepository.DeleteAsync(id);
-        return _mapper.Map<ProductDto>(entity);
+        var entity = await _productRepository.GetByIdAsync(id);
+
+        if (entity is null) throw new Exception("Product Not Found");
+
+        await _productRepository.DeleteAsync(id);        
     }
 }
