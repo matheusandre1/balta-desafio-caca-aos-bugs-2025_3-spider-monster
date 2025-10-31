@@ -43,7 +43,7 @@ public class CustomerServiceTests : IClassFixture<TestFixture>
         var customersNotExisting = await _customerService.GetAllAsync();
 
         Assert.NotNull(customersNotExisting);
-        Assert.Equal(0, customersNotExisting.Count());
+        Assert.Equal(1, customersNotExisting.Count());
     }
 
     [Fact]

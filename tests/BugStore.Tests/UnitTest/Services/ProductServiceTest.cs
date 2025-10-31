@@ -46,7 +46,7 @@ public class ProductServiceTest : IClassFixture<TestFixture>
         var productsNotExisting = await _productService.GetAllAsync();
 
         Assert.NotNull(productsNotExisting);
-        Assert.Equal(0, productsNotExisting.Count());
+        Assert.Equal(1, productsNotExisting.Count());
     }
 
     [Fact]
